@@ -1,6 +1,6 @@
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.applications import imagenet_utils
-from tensorflow.keras.models import Sequential
+from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import Conv2D, Flatten, Dense
 from PIL import Image
 import numpy as np
@@ -17,19 +17,12 @@ IMAGE_CHANNELS=3
 app = flask.Flask(__name__)
 model = None
 
-def load_model():
+def load_model1():
     # load the pre-trained Keras model (here we are using a model
     # pre-trained on ImageNet and provided by Keras, but you can
     # substitute in your own networks just as easily)
     global model
-    model = Sequential()
-    model.add(Conv2D(64, (3,3), activation='relu', strides=(2,2), input_shape=(IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_CHANNELS)))
-    model.add(Conv2D(64, (3,3), activation='relu'))
-    model.add(Flatten())
-    model.add(Dense(256, activation='relu'))
-    model.add(Dense(1, activation='sigmoid'))
-    model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['acc', 'Precision'])
-    model.load_weights('./API/mask.weights.best.hdf5')
+    model = load_model('./API/my_model.hdf5')
 
 def face_detection(img):
     face_cascade = cv2.CascadeClassifier('./API/haarcascade_frontalface_alt.xml')
@@ -83,6 +76,6 @@ def predict():
 if __name__ == "__main__":
     print(("* Loading Keras model and Flask starting server..."
         "please wait until server has fully started"))
-    load_model()
+    load_model1()
     print("Done")
     app.run()

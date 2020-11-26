@@ -1,0 +1,41 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is our Safety Helmet project API. Using this public API you will be able to pass any image of a worker and know if the person is wearing a helmet or not. \n\n [Project repository](https://github.com/EduFdezSoy/safety-first) \n\n [Dataset Repository](https://github.com/sergiorodenas/ml-data)\n\n Project made by [Rubén Zúñiga](https://github.com/yezarou), [Eduardo Fernández](https://github.com/EduFdezSoy), [Sergio Ródenas](https://github.com/sergiorodenas) and [Raúl Robledo](https://github.com/Nara14) as part of the *Artificial Intelligence Course* by the *Samsung Innovation Campus*.  ",
+    "version": "1.0.0",
+    "title": "Safety First"
+  },
+  "host": "petstore.swagger.io",
+  "basePath": "/v2",
+  "tags": [
+    {
+      "name": "predict",
+      "description": "Predict the image",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/predict": {
+      "post": {
+        "tags": [
+          "predict"
+        ],
+        "summary": "Predict if the person have a helmet.",
+        "description": "",
+        "operationId": "addPet",
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

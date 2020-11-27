@@ -1,3 +1,4 @@
+import tensorflow as tf
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.applications import imagenet_utils
 from tensorflow.keras.models import Sequential, load_model
@@ -23,25 +24,19 @@ def load_model1():
     # pre-trained on ImageNet and provided by Keras, but you can
     # substitute in your own networks just as easily)
     model = Sequential()
-    model.add(Conv2D(64, (3,3), activation='relu', strides=(2,2), input_shape=(IMAGE_WIDTH,IMAGE_HEIGHT,IMAGE_CHANNELS)))
-    model.add(Conv2D(64, (3,3), activation='relu'))
+    model.add(Conv2D(64, (3,3), activation='relu', strides=(2,2), input_shape=(IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_CHANNELS)))
+    model.add(Conv2D(32, (3,3), activation='relu'))
     model.add(Dropout(0.2))
-    model.add(Conv2D(64, (3,3), activation='relu'))
-    model.add(MaxPooling2D((2, 2)))
-    model.add(Dropout(0.2))
-    model.add(Conv2D(64, (3,3), activation='relu'))
-    model.add(MaxPooling2D((2, 2)))
-    model.add(Dropout(0.2))
-    model.add(Conv2D(126, (3,3), activation='relu'))
-    model.add(MaxPooling2D((2, 2)))
-    model.add(Dropout(0.2))
-    model.add(Conv2D(126, (3,3), activation='relu'))
-    model.add(Dropout(0.3))
+    model.add(Conv2D(16, (3,3), activation='relu'))
+    model.add(MaxPooling2D((2,2)))
+    model.add(Dropout(0.1))
+    model.add(Conv2D(8, (3,3), activation='relu'))
+    model.add(MaxPooling2D((2,2)))
+    model.add(Dropout(0.1))
     model.add(Flatten())
     model.add(Dense(256, activation='relu'))
-    model.add(Dropout(0.3))
-    model.add(Dense(1, activation = 'sigmoid'))
-    model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['acc'])
+    model.add(Dense(1, activation='sigmoid'))
+    model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['acc', tf.keras.metrics.Precision()])
     model.load_weights('./model.weights.best.hdf5')
     return model
 

@@ -6,19 +6,14 @@
     "title": "Safety First"
   },
   "host": "petstore.swagger.io",
-  "basePath": "/v2",
+  "basePath": "/",
   "tags": [
     {
       "name": "predict",
-      "description": "Predict the image",
-      "externalDocs": {
-        "description": "Find out more",
-        "url": "http://swagger.io"
-      }
+      "description": "Predict the image"
     }
   ],
   "schemes": [
-    "https",
     "http"
   ],
   "paths": {
@@ -28,11 +23,38 @@
           "predict"
         ],
         "summary": "Predict if the person have a helmet.",
-        "description": "",
-        "operationId": "addPet",
+        "description": "Predict if the person have a helmet.",
+        "operationId": "uploadFile",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "image to check",
+            "required": true,
+            "type": "file"
+          }
+        ],
         "responses": {
-          "405": {
-            "description": "Invalid input"
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "properties": {
+                "predictions": {
+                  "type": "number",
+                  "example": 0.1
+                },
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
+            }
           }
         }
       }

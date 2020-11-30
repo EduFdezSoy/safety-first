@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "title": "Safety First"
   },
-  "host": "petstore.swagger.io",
+  "host": "api.safety-first.edufdez.es",
   "basePath": "/",
   "tags": [
     {
@@ -14,7 +14,7 @@
     }
   ],
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/predict": {
